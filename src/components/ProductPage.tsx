@@ -28,36 +28,37 @@ export const ProductPage: React.FC<ProductPageProps> = ({ onNavigate }) => {
     {
       icon: <Zap className="w-6 h-6" />,
       title: "Lightning-Fast Processing",
-      description: "Reduce exchange cycle times by 50%+ with automated workflows and real-time carrier communication.",
+      description: "Reduce exchange cycle times by 50%+ with automated workflows and real-time carrier communication for all policy types.",
       metric: "50% faster"
     },
     {
       icon: <Shield className="w-6 h-6" />,
       title: "Enterprise Security",
-      description: "SOC 2 Type II compliance with end-to-end encryption and comprehensive audit trails.",
+      description: "SOC 2 Type II compliance with end-to-end encryption and comprehensive audit trails for life insurance and annuity exchanges.",
       metric: "SOC 2 Certified"
     },
     {
       icon: <Clock className="w-6 h-6" />,
       title: "Real-Time Tracking",
-      description: "Monitor every step of the exchange process with live updates and SLA monitoring.",
+      description: "Monitor every step of the exchange process with live updates and SLA monitoring across multiple policies and carriers.",
       metric: "Live updates"
     },
     {
       icon: <TrendingUp className="w-6 h-6" />,
       title: "Analytics & Insights",
-      description: "Comprehensive reporting and analytics to optimize your exchange operations.",
+      description: "Comprehensive reporting and analytics to optimize your exchange operations across all product types.",
       metric: "360° visibility"
     }
   ];
 
   const benefits = [
-    "Reduce NIGO rates by up to 70%",
-    "Automate carrier communications",
-    "Complete audit trail for compliance",
-    "Real-time collaboration across teams",
-    "Mobile-responsive design",
-    "API-first architecture"
+    "Handle multiple life insurance and annuity policies in one exchange",
+    "Reduce NIGO rates by up to 70% across all product types",
+    "Automate carrier communications for legacy and modern systems",
+    "Complete audit trail for regulatory compliance",
+    "Real-time collaboration across teams and carriers",
+    "Mobile-responsive design for field agents",
+    "API-first architecture for seamless integrations"
   ];
 
   const stats = [
@@ -68,13 +69,13 @@ export const ProductPage: React.FC<ProductPageProps> = ({ onNavigate }) => {
   ];
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-white via-blue-50/40 to-purple-50/40">
+    <div className="min-h-screen bg-gradient-to-br from-white via-blue-50/30 to-purple-50/30">
       {/* Hero Section */}
       <section className="relative overflow-hidden">
-        {/* Background Effects - Much lighter */}
-        <div className="absolute inset-0 bg-gradient-to-r from-blue-500/5 via-purple-500/5 to-cyan-500/5" />
-        <div className="absolute top-0 left-1/4 w-96 h-96 bg-blue-400/10 rounded-full blur-3xl" />
-        <div className="absolute bottom-0 right-1/4 w-96 h-96 bg-purple-400/10 rounded-full blur-3xl" />
+        {/* Background Effects - Even lighter */}
+        <div className="absolute inset-0 bg-gradient-to-r from-blue-500/3 via-purple-500/3 to-cyan-500/3" />
+        <div className="absolute top-0 left-1/4 w-96 h-96 bg-blue-400/8 rounded-full blur-3xl" />
+        <div className="absolute bottom-0 right-1/4 w-96 h-96 bg-purple-400/8 rounded-full blur-3xl" />
         
         <div className="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pt-20 pb-32">
           <div className="text-center space-y-8">
@@ -85,13 +86,13 @@ export const ProductPage: React.FC<ProductPageProps> = ({ onNavigate }) => {
             <h1 className="text-5xl md:text-7xl font-bold text-slate-900 leading-tight">
               The Future of
               <span className="block bg-gradient-to-r from-blue-600 via-purple-600 to-cyan-600 bg-clip-text text-transparent">
-                Insurance Exchanges
+                Investment Exchanges
               </span>
             </h1>
             
-            <p className="text-xl md:text-2xl text-slate-700 max-w-4xl mx-auto leading-relaxed">
+            <p className="text-xl md:text-2xl text-slate-800 max-w-4xl mx-auto leading-relaxed">
               Transform antiquated paper-based 1035 exchanges into a seamless digital workflow. 
-              Reduce cycle times, eliminate errors, and deliver exceptional client experiences.
+              Handle multiple life insurance policies and annuities in a single exchange while reducing cycle times and eliminating errors.
             </p>
             
             <div className="flex flex-col sm:flex-row gap-4 justify-center items-center">
@@ -118,7 +119,7 @@ export const ProductPage: React.FC<ProductPageProps> = ({ onNavigate }) => {
       </section>
 
       {/* Stats Section */}
-      <section className="py-20 bg-white/70 backdrop-blur-sm border-y border-slate-200/50">
+      <section className="py-20 bg-white/80 backdrop-blur-sm border-y border-slate-200/50">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="grid grid-cols-2 md:grid-cols-4 gap-8">
             {stats.map((stat, index) => (
@@ -127,7 +128,7 @@ export const ProductPage: React.FC<ProductPageProps> = ({ onNavigate }) => {
                   {stat.value}
                 </div>
                 <div className="text-lg font-semibold text-slate-900">{stat.label}</div>
-                <div className="text-sm text-slate-600">{stat.description}</div>
+                <div className="text-sm text-slate-700">{stat.description}</div>
               </div>
             ))}
           </div>
@@ -135,14 +136,15 @@ export const ProductPage: React.FC<ProductPageProps> = ({ onNavigate }) => {
       </section>
 
       {/* Features Section */}
-      <section className="py-24 bg-white/50">
+      <section className="py-24 bg-white/60">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="text-center space-y-4 mb-16">
             <h2 className="text-4xl md:text-5xl font-bold text-slate-900">
-              Built for the Modern Insurance Industry
+              Built for Modern Investment Operations
             </h2>
-            <p className="text-xl text-slate-700 max-w-3xl mx-auto">
-              Every feature designed to eliminate friction, reduce errors, and accelerate your 1035 exchange operations.
+            <p className="text-xl text-slate-800 max-w-3xl mx-auto">
+              Every feature designed to handle complex exchanges involving multiple life insurance policies and annuities, 
+              eliminating friction and accelerating your operations.
             </p>
           </div>
 
@@ -154,7 +156,7 @@ export const ProductPage: React.FC<ProductPageProps> = ({ onNavigate }) => {
                     {feature.icon}
                   </div>
                   <h3 className="text-xl font-semibold text-slate-900">{feature.title}</h3>
-                  <p className="text-slate-700">{feature.description}</p>
+                  <p className="text-slate-800">{feature.description}</p>
                   <Badge variant="info" glow>{feature.metric}</Badge>
                 </CardContent>
               </Card>
@@ -183,7 +185,7 @@ export const ProductPage: React.FC<ProductPageProps> = ({ onNavigate }) => {
                   </div>
                   <div>
                     <h4 className="font-semibold text-red-300">Weeks-Long Cycle Times</h4>
-                    <p className="text-slate-200">Manual processes and paper-based workflows create unnecessary delays</p>
+                    <p className="text-slate-200">Manual processes for multiple policies create exponential delays and complexity</p>
                   </div>
                 </div>
                 
@@ -193,7 +195,7 @@ export const ProductPage: React.FC<ProductPageProps> = ({ onNavigate }) => {
                   </div>
                   <div>
                     <h4 className="font-semibold text-red-300">High NIGO Rates</h4>
-                    <p className="text-slate-200">Missing information and errors lead to costly resubmissions</p>
+                    <p className="text-slate-200">Coordinating multiple carriers and policy types leads to frequent errors and resubmissions</p>
                   </div>
                 </div>
                 
@@ -203,7 +205,7 @@ export const ProductPage: React.FC<ProductPageProps> = ({ onNavigate }) => {
                   </div>
                   <div>
                     <h4 className="font-semibold text-red-300">Poor Client Experience</h4>
-                    <p className="text-slate-200">Lack of visibility and communication frustrates clients and agents</p>
+                    <p className="text-slate-200">Lack of visibility across multiple policies frustrates clients and agents</p>
                   </div>
                 </div>
               </div>
@@ -241,14 +243,15 @@ export const ProductPage: React.FC<ProductPageProps> = ({ onNavigate }) => {
       </section>
 
       {/* Technology Section */}
-      <section className="py-24 bg-white/60">
+      <section className="py-24 bg-white/70">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="text-center space-y-4 mb-16">
             <h2 className="text-4xl md:text-5xl font-bold text-slate-900">
               Enterprise-Grade Technology
             </h2>
-            <p className="text-xl text-slate-700 max-w-3xl mx-auto">
-              Built on modern cloud infrastructure with security, scalability, and reliability at its core.
+            <p className="text-xl text-slate-800 max-w-3xl mx-auto">
+              Built to integrate with both legacy carrier systems and modern APIs, ensuring seamless communication 
+              across all your exchange partners.
             </p>
           </div>
 
@@ -259,8 +262,9 @@ export const ProductPage: React.FC<ProductPageProps> = ({ onNavigate }) => {
                   <Lock className="w-8 h-8" />
                 </div>
                 <h3 className="text-xl font-semibold text-slate-900">Security First</h3>
-                <p className="text-slate-700">
-                  SOC 2 Type II compliance, end-to-end encryption, and comprehensive audit trails ensure your data is always protected.
+                <p className="text-slate-800">
+                  SOC 2 Type II compliance, end-to-end encryption, and comprehensive audit trails ensure your data is always protected 
+                  across all policy types and carriers.
                 </p>
               </CardContent>
             </Card>
@@ -270,9 +274,10 @@ export const ProductPage: React.FC<ProductPageProps> = ({ onNavigate }) => {
                 <div className="w-16 h-16 mx-auto bg-gradient-to-br from-purple-500 to-pink-500 rounded-2xl flex items-center justify-center text-white group-hover:scale-110 transition-transform duration-300">
                   <Globe className="w-8 h-8" />
                 </div>
-                <h3 className="text-xl font-semibold text-slate-900">API-First</h3>
-                <p className="text-slate-700">
-                  Seamlessly integrate with your existing systems through our comprehensive REST API and webhook infrastructure.
+                <h3 className="text-xl font-semibold text-slate-900">Universal Integration</h3>
+                <p className="text-slate-800">
+                  Connect with legacy fax systems, modern APIs, and everything in between. Our platform adapts to each carrier's 
+                  preferred communication method.
                 </p>
               </CardContent>
             </Card>
@@ -283,8 +288,9 @@ export const ProductPage: React.FC<ProductPageProps> = ({ onNavigate }) => {
                   <BarChart3 className="w-8 h-8" />
                 </div>
                 <h3 className="text-xl font-semibold text-slate-900">Real-Time Analytics</h3>
-                <p className="text-slate-700">
-                  Gain insights into your operations with comprehensive reporting, SLA monitoring, and performance analytics.
+                <p className="text-slate-800">
+                  Track performance across all policy types, carriers, and exchange scenarios with comprehensive reporting 
+                  and SLA monitoring.
                 </p>
               </CardContent>
             </Card>
@@ -293,14 +299,15 @@ export const ProductPage: React.FC<ProductPageProps> = ({ onNavigate }) => {
       </section>
 
       {/* Responsive Design Section */}
-      <section className="py-24 bg-gradient-to-br from-blue-50/60 to-purple-50/60">
+      <section className="py-24 bg-gradient-to-br from-blue-50/70 to-purple-50/70">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="text-center space-y-4 mb-16">
             <h2 className="text-4xl md:text-5xl font-bold text-slate-900">
               Works Everywhere You Do
             </h2>
-            <p className="text-xl text-slate-700 max-w-3xl mx-auto">
-              Responsive design ensures a perfect experience across all devices and screen sizes.
+            <p className="text-xl text-slate-800 max-w-3xl mx-auto">
+              Whether you're in the office coordinating complex multi-policy exchanges or in the field with clients, 
+              our responsive design ensures a perfect experience across all devices.
             </p>
           </div>
 
@@ -310,7 +317,7 @@ export const ProductPage: React.FC<ProductPageProps> = ({ onNavigate }) => {
                 <Smartphone className="w-8 h-8" />
               </div>
               <h3 className="font-semibold text-slate-900">Mobile</h3>
-              <p className="text-sm text-slate-700">iOS & Android</p>
+              <p className="text-sm text-slate-800">iOS & Android</p>
             </div>
 
             <div className="text-center space-y-4">
@@ -318,7 +325,7 @@ export const ProductPage: React.FC<ProductPageProps> = ({ onNavigate }) => {
                 <Tablet className="w-8 h-8" />
               </div>
               <h3 className="font-semibold text-slate-900">Tablet</h3>
-              <p className="text-sm text-slate-700">iPad & Android</p>
+              <p className="text-sm text-slate-800">iPad & Android</p>
             </div>
 
             <div className="text-center space-y-4">
@@ -326,7 +333,7 @@ export const ProductPage: React.FC<ProductPageProps> = ({ onNavigate }) => {
                 <Monitor className="w-8 h-8" />
               </div>
               <h3 className="font-semibold text-slate-900">Desktop</h3>
-              <p className="text-sm text-slate-700">Windows & Mac</p>
+              <p className="text-sm text-slate-800">Windows & Mac</p>
             </div>
           </div>
         </div>
@@ -343,7 +350,8 @@ export const ProductPage: React.FC<ProductPageProps> = ({ onNavigate }) => {
             Ready to Transform Your 1035 Exchanges?
           </h2>
           <p className="text-xl text-blue-100 max-w-2xl mx-auto">
-            Join leading insurance companies who have already revolutionized their exchange operations with ExchangeFlow.
+            Join leading investment companies who have already revolutionized their life insurance and annuity 
+            exchange operations with ExchangeFlow.
           </p>
           <div className="flex flex-col sm:flex-row gap-4 justify-center">
             <Button 
