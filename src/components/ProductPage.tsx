@@ -99,7 +99,7 @@ export const ProductPage: React.FC<ProductPageProps> = ({ onNavigate }) => {
               <Button 
                 variant="primary" 
                 size="lg"
-                onClick={() => onNavigate?.('demo')}
+                onClick={() => onNavigate?.('dashboard')}
                 className="text-lg px-8 py-4"
               >
                 Start Free Trial
@@ -231,7 +231,7 @@ export const ProductPage: React.FC<ProductPageProps> = ({ onNavigate }) => {
               <Button 
                 variant="primary" 
                 size="lg"
-                onClick={() => onNavigate?.('demo')}
+                onClick={() => onNavigate?.('dashboard')}
                 className="bg-gradient-to-r from-emerald-500 to-cyan-500 hover:from-emerald-600 hover:to-cyan-600"
               >
                 See It In Action
@@ -357,7 +357,7 @@ export const ProductPage: React.FC<ProductPageProps> = ({ onNavigate }) => {
             <Button 
               variant="secondary" 
               size="lg"
-              onClick={() => onNavigate?.('demo')}
+              onClick={() => onNavigate?.('dashboard')}
               className="text-lg px-8 py-4 bg-white text-blue-600 hover:bg-blue-50"
             >
               Start Free Trial

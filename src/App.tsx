@@ -1,16 +1,39 @@
 import React, { useState } from 'react';
 import { Navbar } from './components/Navbar';
 import { ProductPage } from './components/ProductPage';
+import { Dashboard } from './components/Dashboard';
+import { CreateExchange } from './components/CreateExchange';
 import { Button } from './components/ui/Button';
 import { ArrowRight, Zap } from 'lucide-react';
 
 function App() {
   const [currentPage, setCurrentPage] = useState<string>('home');
+  const [pageData, setPageData] = useState<any>(null);
 
-  const handleNavigate = (page: string) => {
+  const handleNavigate = (page: string, data?: any) => {
     setCurrentPage(page);
+    setPageData(data);
   };
 
+  // Dashboard view
+  if (currentPage === 'dashboard' || currentPage === 'demo') {
+    return (
+      <div className="min-h-screen">
+        <Dashboard onNavigate={handleNavigate} />
+      </div>
+    );
+  }
+
+  // Create Exchange view
+  if (currentPage === 'create-exchange') {
+    return (
+      <div className="min-h-screen">
+        <CreateExchange onNavigate={handleNavigate} />
+      </div>
+    );
+  }
+
+  // Product page
   if (currentPage === 'product') {
     return (
       <div className="min-h-screen">
@@ -43,15 +66,27 @@ function App() {
             The future of 1035 exchange workflow management. Transform your antiquated processes into a seamless digital experience.
           </p>
           
-          <Button 
-            variant="primary" 
-            size="lg"
-            onClick={() => handleNavigate('product')}
-            className="text-lg px-8 py-4"
-          >
-            Explore Our Product
-            <ArrowRight className="w-5 h-5 ml-2" />
-          </Button>
+          <div className="flex flex-col sm:flex-row gap-4 justify-center items-center">
+            <Button 
+              variant="primary" 
+              size="lg"
+              onClick={() => handleNavigate('product')}
+              className="text-lg px-8 py-4"
+            >
+              Explore Our Product
+              <ArrowRight className="w-5 h-5 ml-2" />
+            </Button>
+            
+            <Button 
+              variant="secondary" 
+              size="lg"
+              onClick={() => handleNavigate('dashboard')}
+              className="text-lg px-8 py-4"
+            >
+              Try Demo
+              <ArrowRight className="w-5 h-5 ml-2" />
+            </Button>
+          </div>
         </div>
       </div>
     </div>
