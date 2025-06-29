@@ -79,9 +79,14 @@ export const ProductPage: React.FC<ProductPageProps> = ({ onNavigate }) => {
         
         <div className="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pt-20 pb-32">
           <div className="text-center space-y-8">
-            <Badge variant="info" size="lg" glow>
-              🚀 Revolutionizing 1035 Exchanges
-            </Badge>
+            <div className="flex items-center justify-center space-x-3">
+              <Badge variant="info" size="lg" glow>
+                🚀 Revolutionizing 1035 Exchanges
+              </Badge>
+              <Badge variant="success" size="sm">
+                Welcome back, Erik!
+              </Badge>
+            </div>
             
             <h1 className="text-5xl md:text-7xl font-bold text-slate-900 leading-tight">
               The Future of
@@ -102,7 +107,7 @@ export const ProductPage: React.FC<ProductPageProps> = ({ onNavigate }) => {
                 onClick={() => onNavigate?.('dashboard')}
                 className="text-lg px-8 py-4"
               >
-                Start Free Trial
+                Go to Dashboard
                 <ArrowRight className="w-5 h-5 ml-2" />
               </Button>
               <Button 
@@ -113,6 +118,14 @@ export const ProductPage: React.FC<ProductPageProps> = ({ onNavigate }) => {
               >
                 Watch Demo
               </Button>
+            </div>
+
+            {/* User Status Indicator */}
+            <div className="inline-flex items-center space-x-2 px-4 py-2 bg-emerald-50 border border-emerald-200 rounded-full">
+              <div className="w-2 h-2 bg-emerald-500 rounded-full animate-pulse"></div>
+              <span className="text-sm font-medium text-emerald-700">
+                You're signed in and ready to create exchanges
+              </span>
             </div>
           </div>
         </div>
@@ -347,11 +360,11 @@ export const ProductPage: React.FC<ProductPageProps> = ({ onNavigate }) => {
         
         <div className="relative max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 text-center space-y-8">
           <h2 className="text-4xl md:text-5xl font-bold text-white">
-            Ready to Transform Your 1035 Exchanges?
+            Ready to Start Your Next Exchange?
           </h2>
           <p className="text-xl text-blue-100 max-w-2xl mx-auto">
-            Join leading investment companies who have already revolutionized their life insurance and annuity 
-            exchange operations with ExchangeFlow.
+            You're all set up and ready to go! Create your first exchange or explore the platform's 
+            powerful features to streamline your operations.
           </p>
           <div className="flex flex-col sm:flex-row gap-4 justify-center">
             <Button 
@@ -360,15 +373,15 @@ export const ProductPage: React.FC<ProductPageProps> = ({ onNavigate }) => {
               onClick={() => onNavigate?.('dashboard')}
               className="text-lg px-8 py-4 bg-white text-blue-600 hover:bg-blue-50"
             >
-              Start Free Trial
+              Go to Dashboard
             </Button>
             <Button 
               variant="ghost" 
               size="lg"
-              onClick={() => onNavigate?.('contact')}
+              onClick={() => onNavigate?.('create-exchange')}
               className="text-lg px-8 py-4 border-2 border-white text-white hover:bg-white/10"
             >
-              Contact Sales
+              Create Exchange
             </Button>
           </div>
         </div>
