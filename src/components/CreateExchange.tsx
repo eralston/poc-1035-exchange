@@ -626,8 +626,6 @@ export const CreateExchange: React.FC<CreateExchangeProps> = ({ onNavigate }) =>
                           placeholder="Enter policy number"
                         />
 
-                       
-
                         {/* Read-only Target Product Type Badge */}
                         <div className="space-y-2">
                           <label className="block text-sm font-medium text-slate-700">
