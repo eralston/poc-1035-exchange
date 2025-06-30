@@ -609,14 +609,6 @@ export const CreateExchange: React.FC<CreateExchangeProps> = ({ onNavigate }) =>
                       </div>
 
                       <div className="grid md:grid-cols-2 gap-4">
-                        <Input
-                          label="Policy/Account Number"
-                          value={account.accountNumber}
-                          onChange={(e) => updateSourceAccount(index, 'accountNumber', e.target.value)}
-                          error={errors[`account${index}Number`]}
-                          placeholder="Enter policy number"
-                        />
-
                         <Select
                           label="Current Carrier"
                           options={carrierOptions}
@@ -625,6 +617,16 @@ export const CreateExchange: React.FC<CreateExchangeProps> = ({ onNavigate }) =>
                           error={errors[`account${index}Carrier`]}
                           placeholder="Select carrier"
                         />
+                        
+                        <Input
+                          label="Policy/Account Number"
+                          value={account.accountNumber}
+                          onChange={(e) => updateSourceAccount(index, 'accountNumber', e.target.value)}
+                          error={errors[`account${index}Number`]}
+                          placeholder="Enter policy number"
+                        />
+
+                       
 
                         {/* Read-only Target Product Type Badge */}
                         <div className="space-y-2">
