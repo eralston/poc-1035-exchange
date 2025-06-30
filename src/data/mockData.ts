@@ -225,7 +225,7 @@ export const mockDropTickets: DropTicket[] = [
     priority: 'high',
     submissionDate: new Date('2024-12-18T09:15:00Z'),
     targetProductType: 'life_insurance',
-    targetCarrierId: 'symetra-financial',
+    targetCarrierId: 'artemis-financial',
     estimatedValue: 75000,
     notes: 'Urgent request - client needs completion by year end',
     createdBy: 'party-agent-2',
