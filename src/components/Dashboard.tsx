@@ -416,11 +416,6 @@ export const Dashboard: React.FC<DashboardProps> = ({ onNavigate }) => {
                       </div>
                       <div className="flex items-center space-x-3">
                         <StatusBadge status={ticket.status} />
-                        <ProgressIndicator 
-                          steps={progressSteps} 
-                          orientation="horizontal"
-                          className="w-32"
-                        />
                       </div>
                     </div>
                   ))}
@@ -472,7 +467,7 @@ export const Dashboard: React.FC<DashboardProps> = ({ onNavigate }) => {
                           {exchangeColumns.map((column) => (
                             <th
                               key={String(column.key)}
-                              className="px-6 py-4 text-left text-sm font-semibold text-slate-700"
+                              className="px-6 py-4 text-left text-sm font-semibold text-slate-700 whitespace-nowrap"
                             >
                               {column.header}
                             </th>
@@ -507,7 +502,7 @@ export const Dashboard: React.FC<DashboardProps> = ({ onNavigate }) => {
                                 return (
                                   <td 
                                     key={String(column.key)}
-                                    className="px-6 py-4 text-sm text-slate-900"
+                                    className="px-6 py-4 text-sm text-slate-900 whitespace-nowrap"
                                   >
                                     {column.render 
                                       ? column.render(getValue(row, column.key), row)
