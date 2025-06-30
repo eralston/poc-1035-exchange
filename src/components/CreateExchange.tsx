@@ -238,7 +238,7 @@ export const CreateExchange: React.FC<CreateExchangeProps> = ({ onNavigate }) =>
   ];
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-slate-50 via-blue-50/30 to-purple-50/30">
+    <div className="min-h-screen bg-gradient-to-br from-white via-slate-50/20 to-blue-50/10">
       {/* Header */}
       <div className="bg-white/95 backdrop-blur-sm border-b border-slate-200">
         <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
