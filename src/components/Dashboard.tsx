@@ -7,6 +7,9 @@ import { PolicyCard } from './PolicyCard';
 import { AuditLogEntry } from './AuditLogEntry';
 import { ProgressIndicator } from './ProgressIndicator';
 import { Table } from './ui/Table';
+import { RealtimeIndicator } from './RealtimeIndicator';
+import { LiveActivityFeed } from './LiveActivityFeed';
+import { useLiveData, useRealtimeNotifications } from '../hooks/useRealtime';
 import { 
   Plus, 
   Search, 
@@ -24,7 +27,8 @@ import {
   ArrowRight,
   Eye,
   MessageSquare,
-  Download
+  Download,
+  Zap
 } from 'lucide-react';
 import { 
   getDropTickets, 
@@ -50,62 +54,48 @@ interface DashboardProps {
 }
 
 export const Dashboard: React.FC<DashboardProps> = ({ onNavigate }) => {
-  const [dropTickets, setDropTickets] = useState<DropTicket[]>([]);
-  const [accounts, setAccounts] = useState<Account[]>([]);
-  const [auditLogs, setAuditLogs] = useState<AuditLog[]>([]);
-  const [communications, setCommunications] = useState<CarrierCommunication[]>([]);
-  const [carriers, setCarriers] = useState<Carrier[]>([]);
-  const [parties, setParties] = useState<Party[]>([]);
-  const [analytics, setAnalytics] = useState<any>(null);
-  const [loading, setLoading] = useState(true);
   const [activeTab, setActiveTab] = useState<'overview' | 'exchanges' | 'activity'>('overview');
 
-  useEffect(() => {
-    const loadData = async () => {
-      try {
-        const [
-          ticketsData,
-          accountsData,
-          auditData,
-          commsData,
-          carriersData,
-          partiesData,
-          analyticsData
-        ] = await Promise.all([
-          getDropTickets(),
-          getAccounts(),
-          getAuditLogs(),
-          getCommunications(),
-          getCarriers(),
-          getParties(),
-          getAnalytics()
-        ]);
-
-        setDropTickets(ticketsData);
-        setAccounts(accountsData);
-        setAuditLogs(auditData.slice(0, 10)); // Recent 10 entries
-        setCommunications(commsData);
-        setCarriers(carriersData);
-        setParties(partiesData);
-        setAnalytics(analyticsData);
-      } catch (error) {
-        console.error('Error loading dashboard data:', error);
-      } finally {
-        setLoading(false);
-      }
-    };
-
-    loadData();
-  }, []);
-
-  const getCarrierById = (id: string) => carriers.find(c => c.id === id);
-  const getPartyById = (id: string) => parties.find(p => p.id === id);
-
-  const recentDropTickets = dropTickets.slice(0, 5);
-  const urgentTickets = dropTickets.filter(dt => dt.priority === 'urgent' || dt.priority === 'high');
-  const overdueComms = communications.filter(comm => 
-    comm.slaDeadline && new Date(comm.slaDeadline) < new Date() && comm.status !== 'responded'
+  // Use live data hooks for real-time updates
+  const { data: dropTickets, loading: ticketsLoading } = useLiveData(
+    getDropTickets,
+    [],
+    ['DropTicketSubmitted', 'ExchangeCompleted']
   );
+
+  const { data: accounts } = useLiveData(
+    getAccounts,
+    [],
+    ['AccountValidated', 'TransferConfirmed']
+  );
+
+  const { data: auditLogs } = useLiveData(
+    () => getAuditLogs().then(logs => logs.slice(0, 10)),
+    [],
+    ['*']
+  );
+
+  const { data: communications } = useLiveData(
+    getCommunications,
+    [],
+    ['CarrierRequestSent']
+  );
+
+  const { data: carriers } = useLiveData(getCarriers);
+  const { data: parties } = useLiveData(getParties);
+  const { data: analytics } = useLiveData(getAnalytics);
+
+  // Real-time notifications
+  const { notifications, unreadCount, markAllAsRead } = useRealtimeNotifications();
+
+  const getCarrierById = (id: string) => carriers?.find(c => c.id === id);
+  const getPartyById = (id: string) => parties?.find(p => p.id === id);
+
+  const recentDropTickets = dropTickets?.slice(0, 5) || [];
+  const urgentTickets = dropTickets?.filter(dt => dt.priority === 'urgent' || dt.priority === 'high') || [];
+  const overdueComms = communications?.filter(comm => 
+    comm.slaDeadline && new Date(comm.slaDeadline) < new Date() && comm.status !== 'responded'
+  ) || [];
 
   const progressSteps = [
     { id: 'submitted', title: 'Submitted', status: 'completed' as const },
@@ -166,9 +156,9 @@ export const Dashboard: React.FC<DashboardProps> = ({ onNavigate }) => {
     }
   ];
 
-  if (loading) {
+  if (ticketsLoading) {
     return (
-      <div className="min-h-screen bg-gradient-to-br from-slate-50 via-blue-50/30 to-purple-50/30 flex items-center justify-center">
+      <div className="min-h-screen bg-gradient-to-br from-white via-slate-50/20 to-blue-50/10 flex items-center justify-center">
         <div className="text-center space-y-4">
           <div className="w-12 h-12 border-4 border-blue-500 border-t-transparent rounded-full animate-spin mx-auto"></div>
           <p className="text-slate-600">Loading dashboard...</p>
@@ -178,21 +168,31 @@ export const Dashboard: React.FC<DashboardProps> = ({ onNavigate }) => {
   }
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-slate-50 via-blue-50/30 to-purple-50/30">
+    <div className="min-h-screen bg-gradient-to-br from-white via-slate-50/20 to-blue-50/10">
       {/* Header */}
       <div className="bg-white/95 backdrop-blur-sm border-b border-slate-200 sticky top-0 z-40">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="flex justify-between items-center h-16">
             <div className="flex items-center space-x-4">
-              <h1 className="text-2xl font-bold text-slate-900">ExchangeFlow Dashboard</h1>
-              <Badge variant="success" size="sm">Live</Badge>
+              <div className="flex items-center space-x-2">
+                <div className="w-8 h-8 bg-gradient-to-br from-blue-500 to-purple-600 rounded-lg flex items-center justify-center">
+                  <Zap className="w-5 h-5 text-white" />
+                </div>
+                <h1 className="text-2xl font-bold text-slate-900">ExchangeFlow</h1>
+              </div>
+              <RealtimeIndicator />
             </div>
             <div className="flex items-center space-x-4">
-              <Button variant="ghost" size="sm">
+              <Button 
+                variant="ghost" 
+                size="sm"
+                onClick={markAllAsRead}
+                className="relative"
+              >
                 <Bell className="w-5 h-5" />
-                {(urgentTickets.length + overdueComms.length) > 0 && (
+                {unreadCount > 0 && (
                   <span className="absolute -top-1 -right-1 w-5 h-5 bg-red-500 text-white text-xs rounded-full flex items-center justify-center">
-                    {urgentTickets.length + overdueComms.length}
+                    {unreadCount}
                   </span>
                 )}
               </Button>
@@ -292,7 +292,7 @@ export const Dashboard: React.FC<DashboardProps> = ({ onNavigate }) => {
               </Card>
             </div>
 
-            {/* Alerts & Quick Actions */}
+            {/* Main Content Grid */}
             <div className="grid lg:grid-cols-3 gap-6">
               {/* Urgent Items */}
               <Card>
@@ -328,21 +328,8 @@ export const Dashboard: React.FC<DashboardProps> = ({ onNavigate }) => {
                 </CardContent>
               </Card>
 
-              {/* Recent Activity */}
-              <Card>
-                <CardHeader>
-                  <h3 className="text-lg font-semibold text-slate-900">Recent Activity</h3>
-                </CardHeader>
-                <CardContent className="space-y-4">
-                  {auditLogs.slice(0, 5).map(log => (
-                    <AuditLogEntry 
-                      key={log.id} 
-                      auditLog={log} 
-                      user={log.userId ? getPartyById(log.userId) : undefined}
-                    />
-                  ))}
-                </CardContent>
-              </Card>
+              {/* Live Activity Feed */}
+              <LiveActivityFeed maxItems={8} />
 
               {/* Quick Actions */}
               <Card>
@@ -469,7 +456,7 @@ export const Dashboard: React.FC<DashboardProps> = ({ onNavigate }) => {
             <Card>
               <CardContent className="p-0">
                 <Table
-                  data={dropTickets}
+                  data={dropTickets || []}
                   columns={exchangeColumns}
                   emptyMessage="No exchanges found"
                 />
@@ -481,22 +468,26 @@ export const Dashboard: React.FC<DashboardProps> = ({ onNavigate }) => {
         {/* Activity Tab */}
         {activeTab === 'activity' && (
           <div className="space-y-6">
-            <Card>
-              <CardHeader>
-                <h3 className="text-lg font-semibold text-slate-900">System Activity</h3>
-              </CardHeader>
-              <CardContent>
-                <div className="space-y-4">
-                  {auditLogs.map(log => (
-                    <AuditLogEntry 
-                      key={log.id} 
-                      auditLog={log} 
-                      user={log.userId ? getPartyById(log.userId) : undefined}
-                    />
-                  ))}
-                </div>
-              </CardContent>
-            </Card>
+            <div className="grid lg:grid-cols-2 gap-6">
+              <LiveActivityFeed maxItems={20} />
+              
+              <Card>
+                <CardHeader>
+                  <h3 className="text-lg font-semibold text-slate-900">System Activity</h3>
+                </CardHeader>
+                <CardContent>
+                  <div className="space-y-4">
+                    {auditLogs?.map(log => (
+                      <AuditLogEntry 
+                        key={log.id} 
+                        auditLog={log} 
+                        user={log.userId ? getPartyById(log.userId) : undefined}
+                      />
+                    ))}
+                  </div>
+                </CardContent>
+              </Card>
+            </div>
           </div>
         )}
       </div>

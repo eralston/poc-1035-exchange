@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import { RealtimeProvider } from './contexts/RealtimeContext';
 import { Navbar } from './components/Navbar';
 import { ProductPage } from './components/ProductPage';
 import { Dashboard } from './components/Dashboard';
@@ -15,11 +16,30 @@ function App() {
     setPageData(data);
   };
 
+  // Wrap the entire app with RealtimeProvider
+  return (
+    <RealtimeProvider>
+      <AppContent 
+        currentPage={currentPage} 
+        pageData={pageData} 
+        onNavigate={handleNavigate} 
+      />
+    </RealtimeProvider>
+  );
+}
+
+interface AppContentProps {
+  currentPage: string;
+  pageData: any;
+  onNavigate: (page: string, data?: any) => void;
+}
+
+const AppContent: React.FC<AppContentProps> = ({ currentPage, pageData, onNavigate }) => {
   // Dashboard view
   if (currentPage === 'dashboard' || currentPage === 'demo') {
     return (
       <div className="min-h-screen">
-        <Dashboard onNavigate={handleNavigate} />
+        <Dashboard onNavigate={onNavigate} />
       </div>
     );
   }
@@ -28,7 +48,7 @@ function App() {
   if (currentPage === 'create-exchange') {
     return (
       <div className="min-h-screen">
-        <CreateExchange onNavigate={handleNavigate} />
+        <CreateExchange onNavigate={onNavigate} />
       </div>
     );
   }
@@ -37,8 +57,8 @@ function App() {
   if (currentPage === 'product') {
     return (
       <div className="min-h-screen">
-        <Navbar onNavigate={handleNavigate} currentPage={currentPage} />
-        <ProductPage onNavigate={handleNavigate} />
+        <Navbar onNavigate={onNavigate} currentPage={currentPage} />
+        <ProductPage onNavigate={onNavigate} />
       </div>
     );
   }
@@ -46,7 +66,7 @@ function App() {
   // Home page
   return (
     <div className="min-h-screen bg-gradient-to-br from-slate-50 via-blue-50/30 to-purple-50/30">
-      <Navbar onNavigate={handleNavigate} currentPage={currentPage} />
+      <Navbar onNavigate={onNavigate} currentPage={currentPage} />
       
       {/* Simple home page with CTA to product page */}
       <div className="flex items-center justify-center min-h-[calc(100vh-4rem)]">
@@ -70,7 +90,7 @@ function App() {
             <Button 
               variant="primary" 
               size="lg"
-              onClick={() => handleNavigate('product')}
+              onClick={() => onNavigate('product')}
               className="text-lg px-8 py-4"
             >
               Explore Our Product
@@ -80,7 +100,7 @@ function App() {
             <Button 
               variant="secondary" 
               size="lg"
-              onClick={() => handleNavigate('dashboard')}
+              onClick={() => onNavigate('dashboard')}
               className="text-lg px-8 py-4"
             >
               Try Demo
@@ -91,6 +111,6 @@ function App() {
       </div>
     </div>
   );
-}
+};
 
 export default App;
