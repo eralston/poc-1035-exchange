@@ -5,6 +5,7 @@ import { ProductPage } from './components/ProductPage';
 import { Dashboard } from './components/Dashboard';
 import { CreateExchange } from './components/CreateExchange';
 import { ExchangeDetail } from './components/ExchangeDetail';
+import { AccountDetail } from './components/AccountDetail';
 import { Button } from './components/ui/Button';
 import { ArrowRight, Zap } from 'lucide-react';
 
@@ -36,6 +37,18 @@ interface AppContentProps {
 }
 
 const AppContent: React.FC<AppContentProps> = ({ currentPage, pageData, onNavigate }) => {
+  // Account Detail view
+  if (currentPage === 'account-detail') {
+    return (
+      <div className="min-h-screen">
+        <AccountDetail 
+          accountId={pageData?.id || 'account-1'} 
+          onNavigate={onNavigate} 
+        />
+      </div>
+    );
+  }
+
   // Exchange Detail view
   if (currentPage === 'exchange-detail') {
     return (

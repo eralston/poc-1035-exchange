@@ -390,6 +390,11 @@ export const getAccounts = async (): Promise<Account[]> => {
   return dataStore.read<Account>('accounts');
 };
 
+export const getAccountById = async (id: string): Promise<Account | null> => {
+  await new Promise(resolve => setTimeout(resolve, 50));
+  return dataStore.findById<Account>('accounts', id) || null;
+};
+
 export const getAccountsByDropTicketId = async (dropTicketId: string): Promise<Account[]> => {
   await new Promise(resolve => setTimeout(resolve, 50));
   return dataStore.findWhere<Account>('accounts', acc => acc.dropTicketId === dropTicketId);
@@ -495,6 +500,11 @@ export const getCommunicationsByDropTicketId = async (dropTicketId: string): Pro
   return dataStore.findWhere<CarrierCommunication>('communications', comm => comm.dropTicketId === dropTicketId);
 };
 
+export const getCommunicationsByAccountId = async (accountId: string): Promise<CarrierCommunication[]> => {
+  await new Promise(resolve => setTimeout(resolve, 50));
+  return dataStore.findWhere<CarrierCommunication>('communications', comm => comm.accountId === accountId);
+};
+
 export const createCarrierCommunication = async (
   dropTicketId: string,
   accountId: string,
@@ -559,6 +569,14 @@ export const createCarrierCommunication = async (
   eventBus.emit(event);
 
   return communication;
+};
+
+// Document Operations
+export const getDocumentsByAccountId = async (accountId: string): Promise<Document[]> => {
+  await new Promise(resolve => setTimeout(resolve, 50));
+  // For now, return empty array since we don't have account-specific documents in mock data
+  // In real implementation, this would filter documents by accountId
+  return [];
 };
 
 // Party Operations
@@ -716,6 +734,13 @@ export const getAuditLogsByDropTicketId = async (dropTicketId: string): Promise<
   return dataStore.findWhere<AuditLog>('auditLogs', log => log.dropTicketId === dropTicketId);
 };
 
+export const getAuditLogsByAccountId = async (accountId: string): Promise<AuditLog[]> => {
+  await new Promise(resolve => setTimeout(resolve, 50));
+  return dataStore.findWhere<AuditLog>('auditLogs', log => 
+    log.entityType === 'account' && log.entityId === accountId
+  );
+};
+
 // Analytics Operations
 export const getAnalytics = async (): Promise<AnalyticsResponse> => {
   await new Promise(resolve => setTimeout(resolve, 200));
@@ -771,7 +796,7 @@ export const getAnalytics = async (): Promise<AnalyticsResponse> => {
         { carrierId: 'carrier-1', carrierName: 'MetLife Insurance', averageResponseTime: 48, slaComplianceRate: 95 },
         { carrierId: 'carrier-2', carrierName: 'Prudential Financial', averageResponseTime: 36, slaComplianceRate: 98 },
         { carrierId: 'carrier-3', carrierName: 'New York Life', averageResponseTime: 72, slaComplianceRate: 85 },
-        { carrierId: 'carrier-4', carrierName: 'Pacific Life', averageResponseTime: 54, slaComplianceRate: 92 }
+        { carrierId: 'symetra-financial', carrierName: 'Symetra Financial', averageResponseTime: 42, slaComplianceRate: 96 }
       ]
     },
     statusBreakdown: [

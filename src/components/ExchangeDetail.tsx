@@ -601,10 +601,7 @@ export const ExchangeDetail: React.FC<ExchangeDetailProps> = ({
                     key={account.id}
                     account={account}
                     carrier={getCarrierById(account.carrierId)}
-                    onClick={() => {
-                      setSelectedAccount(account);
-                      setShowCommunicationModal(true);
-                    }}
+                    onClick={() => onNavigate?.('account-detail', { id: account.id })}
                   />
                 ))}
               </div>
@@ -618,6 +615,7 @@ export const ExchangeDetail: React.FC<ExchangeDetailProps> = ({
                   <PolicyCard
                     account={targetAccount}
                     carrier={getCarrierById(targetAccount.carrierId)}
+                    onClick={() => onNavigate?.('account-detail', { id: targetAccount.id })}
                   />
                 </div>
               </div>
