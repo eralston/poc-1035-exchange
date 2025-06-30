@@ -222,6 +222,12 @@ export const ExchangeDetail: React.FC<ExchangeDetailProps> = ({
     }
   };
 
+  // Handle account card click
+  const handleAccountClick = (account: Account) => {
+    console.log('Account clicked:', account.id, account.accountNumber);
+    onNavigate?.('account-detail', { id: account.id });
+  };
+
   const communicationColumns = [
     {
       key: 'createdAt',
@@ -601,7 +607,7 @@ export const ExchangeDetail: React.FC<ExchangeDetailProps> = ({
                     key={account.id}
                     account={account}
                     carrier={getCarrierById(account.carrierId)}
-                    onClick={() => onNavigate?.('account-detail', { id: account.id })}
+                    onClick={() => handleAccountClick(account)}
                   />
                 ))}
               </div>
@@ -615,7 +621,7 @@ export const ExchangeDetail: React.FC<ExchangeDetailProps> = ({
                   <PolicyCard
                     account={targetAccount}
                     carrier={getCarrierById(targetAccount.carrierId)}
-                    onClick={() => onNavigate?.('account-detail', { id: targetAccount.id })}
+                    onClick={() => handleAccountClick(targetAccount)}
                   />
                 </div>
               </div>

@@ -21,11 +21,18 @@ export const PolicyCard: React.FC<PolicyCardProps> = ({
   const surrenderValue = account.surrenderValue || 0;
   const currentValue = account.currentValue || 0;
 
+  const handleClick = () => {
+    console.log('PolicyCard clicked, account ID:', account.id);
+    if (onClick) {
+      onClick();
+    }
+  };
+
   return (
     <Card 
       hover={!!onClick} 
-      className={`cursor-pointer transition-all duration-200 ${onClick ? 'hover:shadow-lg' : ''}`}
-      onClick={onClick}
+      className={`transition-all duration-200 ${onClick ? 'cursor-pointer hover:shadow-lg hover:border-blue-200 hover:-translate-y-0.5' : ''}`}
+      onClick={handleClick}
     >
       <CardHeader>
         <div className="flex items-start justify-between">
