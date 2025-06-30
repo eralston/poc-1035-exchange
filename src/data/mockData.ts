@@ -240,7 +240,7 @@ export const mockDropTickets: DropTicket[] = [
     priority: 'normal',
     submissionDate: new Date('2024-12-10T14:20:00Z'),
     targetProductType: 'annuity',
-    targetCarrierId: 'symetra-financial',
+    targetCarrierId: 'artemis-financial',
     estimatedValue: 200000,
     notes: 'Standard 1035 exchange completed successfully',
     createdBy: 'party-agent-1',
