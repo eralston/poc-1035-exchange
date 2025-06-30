@@ -32,7 +32,7 @@ export const CreateExchange: React.FC<CreateExchangeProps> = ({ onNavigate }) =>
   const [currentStep, setCurrentStep] = useState(1);
   const [formData, setFormData] = useState<Partial<CreateDropTicketRequest>>({
     targetProductType: 'annuity',
-    targetCarrierId: 'symetra-financial', // Fixed to Symetra
+    targetCarrierId: 'artemis-financial', // Fixed to Symetra
     estimatedValue: undefined,
     notes: '',
     sourceAccounts: [
@@ -337,7 +337,7 @@ export const CreateExchange: React.FC<CreateExchangeProps> = ({ onNavigate }) =>
                           </div>
                           <div>
                             <div className="flex items-center space-x-2">
-                              <span className="font-semibold text-slate-900">Symetra Financial</span>
+                              <span className="font-semibold text-slate-900">Artemis Financial</span>
                               <Badge variant="success" size="sm">
                                 <Star className="w-3 h-3 mr-1" />
                                 Our Company
@@ -352,7 +352,7 @@ export const CreateExchange: React.FC<CreateExchangeProps> = ({ onNavigate }) =>
                       </div>
                     </div>
                     <p className="text-xs text-slate-500">
-                      All exchanges are processed to Symetra Financial as the receiving carrier
+                      All exchanges are processed to Artemis Financial as the receiving carrier
                     </p>
                   </div>
 
