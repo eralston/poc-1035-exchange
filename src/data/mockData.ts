@@ -458,7 +458,7 @@ export const mockDocuments: Document[] = [
     id: 'doc-1',
     dropTicketId: 'drop-ticket-1',
     filename: 'application_robert_williams.pdf',
-    originalFilename: 'Symetra Application - Robert Williams.pdf',
+    originalFilename: 'Artemis Application - Robert Williams.pdf',
     fileSize: 2048576,
     mimeType: 'application/pdf',
     documentType: 'application',
