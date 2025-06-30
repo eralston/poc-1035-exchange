@@ -292,7 +292,7 @@ export const mockAccounts: Account[] = [
     id: 'account-3',
     dropTicketId: 'drop-ticket-1',
     accountNumber: 'SYM-ANN-NEW001',
-    carrierId: 'symetra-financial',
+    carrierId: 'artemis-financial',
     accountType: 'annuity',
     productName: 'Symetra Variable Annuity',
     currentValue: 0,
