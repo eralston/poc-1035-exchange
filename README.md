@@ -13,7 +13,7 @@ This is an example of how to work with AI-powered rapid prototyping tools, inclu
 ![Screenshot 2025-06-30 at 1 29 53 PM](https://github.com/user-attachments/assets/0884ffde-1ca9-4bec-8f08-49dd24f1afb4)
 
 ## 1035 Exchange Details
-![Screenshot 2025-06-30 at 1 30 17 PM](https://github.com/user-attachments/assets/3e37ff55-cbe8-42d8-a462-9bf042b8ad1c)
+![Screenshot 2025-06-30 at 1 30 50 PM](https://github.com/user-attachments/assets/5940de03-7f06-4a3d-9dc0-29c0c77c0c01)
 
 # 1035 Exchange Workflow Management System
 
