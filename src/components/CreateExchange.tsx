@@ -348,9 +348,6 @@ export const CreateExchange: React.FC<CreateExchangeProps> = ({ onNavigate }) =>
                           <Shield className="w-5 h-5" />
                         </div>
                       </div>
-                      <div className="absolute top-2 right-2">
-                        <Badge variant="info" size="sm">Fixed</Badge>
-                      </div>
                     </div>
                     <p className="text-xs text-slate-500">
                       All exchanges are processed to Symetra Financial as the receiving carrier
