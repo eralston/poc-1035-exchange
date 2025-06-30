@@ -15,8 +15,7 @@ import {
   FileText,
   CheckCircle,
   Shield,
-  Star,
-  Lock
+  Star
 } from 'lucide-react';
 import { getCarriers, createDropTicket } from '../services/api';
 import { Carrier, ProductType } from '../types';
@@ -251,10 +250,6 @@ export const CreateExchange: React.FC<CreateExchangeProps> = ({ onNavigate }) =>
     { number: 6, title: 'Review & Submit', icon: CheckCircle }
   ];
 
-  const getProductTypeLabel = (type: ProductType) => {
-    return type === 'life_insurance' ? 'Life Insurance' : 'Annuity';
-  };
-
   return (
     <div className="min-h-screen bg-gradient-to-br from-white via-slate-50/20 to-blue-50/10">
       {/* Header */}
@@ -362,41 +357,13 @@ export const CreateExchange: React.FC<CreateExchangeProps> = ({ onNavigate }) =>
                     </p>
                   </div>
 
-                  {/* Read-Only Target Product Type */}
-                  <div className="space-y-2">
-                    <label className="block text-sm font-medium text-slate-700">
-                      Target Product Type
-                    </label>
-                    <div className="relative">
-                      <div className="w-full px-4 py-3 bg-gradient-to-r from-slate-50 to-blue-50 border-2 border-slate-200 rounded-lg flex items-center justify-between">
-                        <div className="flex items-center space-x-3">
-                          <div className="w-8 h-8 bg-gradient-to-br from-slate-500 to-blue-600 rounded-lg flex items-center justify-center">
-                            <FileText className="w-4 h-4 text-white" />
-                          </div>
-                          <div>
-                            <div className="flex items-center space-x-2">
-                              <span className="font-semibold text-slate-900">
-                                {getProductTypeLabel(formData.targetProductType!)}
-                              </span>
-                              <Badge variant="info" size="sm">
-                                Like-for-Like
-                              </Badge>
-                            </div>
-                            <span className="text-sm text-slate-600">1035 Exchange Requirement</span>
-                          </div>
-                        </div>
-                        <div className="text-slate-400">
-                          <Lock className="w-5 h-5" />
-                        </div>
-                      </div>
-                      <div className="absolute top-2 right-2">
-                        <Badge variant="purple" size="sm">Required</Badge>
-                      </div>
-                    </div>
-                    <p className="text-xs text-slate-500">
-                      1035 exchanges must be like-for-like: {getProductTypeLabel(formData.targetProductType!).toLowerCase()} to {getProductTypeLabel(formData.targetProductType!).toLowerCase()}
-                    </p>
-                  </div>
+                  <Select
+                    label="Target Product Type"
+                    options={productTypeOptions}
+                    value={formData.targetProductType || ''}
+                    onChange={(e) => updateFormData('', 'targetProductType', e.target.value as ProductType)}
+                    error={errors.targetProductType}
+                  />
                 </div>
 
                 <Input
@@ -618,7 +585,7 @@ export const CreateExchange: React.FC<CreateExchangeProps> = ({ onNavigate }) =>
                 <div className="flex items-center justify-between">
                   <div>
                     <h2 className="text-2xl font-bold text-slate-900 mb-2">Source Policies</h2>
-                    <p className="text-slate-600">Add the {getProductTypeLabel(formData.targetProductType!).toLowerCase()} policies to be exchanged.</p>
+                    <p className="text-slate-600">Add the policies to be exchanged.</p>
                   </div>
                   <Button variant="secondary" size="sm" onClick={addSourceAccount}>
                     <Plus className="w-4 h-4 mr-2" />
@@ -630,9 +597,7 @@ export const CreateExchange: React.FC<CreateExchangeProps> = ({ onNavigate }) =>
                   {formData.sourceAccounts?.map((account, index) => (
                     <Card key={index} className="p-6">
                       <div className="flex items-center justify-between mb-4">
-                        <h3 className="text-lg font-semibold text-slate-900">
-                          {getProductTypeLabel(formData.targetProductType!)} Policy {index + 1}
-                        </h3>
+                        <h3 className="text-lg font-semibold text-slate-900">Policy {index + 1}</h3>
                         {formData.sourceAccounts!.length > 1 && (
                           <Button 
                             variant="ghost" 
@@ -662,20 +627,12 @@ export const CreateExchange: React.FC<CreateExchangeProps> = ({ onNavigate }) =>
                           placeholder="Select carrier"
                         />
 
-                        <div className="space-y-2">
-                          <label className="block text-sm font-medium text-slate-700">
-                            Product Type
-                          </label>
-                          <div className="w-full px-4 py-2.5 bg-slate-50 border border-slate-200 rounded-lg flex items-center justify-between">
-                            <span className="text-slate-900 font-medium">
-                              {getProductTypeLabel(formData.targetProductType!)}
-                            </span>
-                            <Badge variant="info" size="sm">Like-for-Like</Badge>
-                          </div>
-                          <p className="text-xs text-slate-500">
-                            Must match target product type for 1035 exchange
-                          </p>
-                        </div>
+                        <Select
+                          label="Product Type"
+                          options={productTypeOptions}
+                          value={account.accountType}
+                          onChange={(e) => updateSourceAccount(index, 'accountType', e.target.value)}
+                        />
 
                         <Input
                           label="Product Name (Optional)"
