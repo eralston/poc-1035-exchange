@@ -15,7 +15,9 @@ import {
   FileText,
   CheckCircle,
   Shield,
-  Star
+  Star,
+  Check,
+  Lock
 } from 'lucide-react';
 import { getCarriers, createDropTicket } from '../services/api';
 import { Carrier, ProductType } from '../types';
@@ -353,6 +355,7 @@ export const CreateExchange: React.FC<CreateExchangeProps> = ({ onNavigate }) =>
                       All exchanges are processed to Symetra Financial as the receiving carrier
                     </p>
                   </div>
+
                   <Select
                     label="Target Product Type"
                     options={productTypeOptions}
@@ -623,10 +626,37 @@ export const CreateExchange: React.FC<CreateExchangeProps> = ({ onNavigate }) =>
                           placeholder="Select carrier"
                         />
 
-                        <div>
-                          <label className="block text-sm font-medium text-slate-700 mb-2">
-                            {formData.targetProductType}
+                        {/* Read-only Target Product Type Badge */}
+                        <div className="space-y-2">
+                          <label className="block text-sm font-medium text-slate-700">
+                            Target Product Type
                           </label>
+                          <div className="w-full px-4 py-3 bg-gradient-to-r from-emerald-50 to-blue-50 border-2 border-emerald-200 rounded-lg flex items-center justify-between">
+                            <div className="flex items-center space-x-3">
+                              <div className="w-8 h-8 bg-gradient-to-br from-emerald-500 to-blue-500 rounded-lg flex items-center justify-center">
+                                <Check className="w-4 h-4 text-white" />
+                              </div>
+                              <div>
+                                <div className="flex items-center space-x-2">
+                                  <span className="font-semibold text-slate-900">
+                                    {formData.targetProductType === 'life_insurance' ? 'Life Insurance' : 'Annuity'}
+                                  </span>
+                                  <Badge variant="success" size="sm">
+                                    <Check className="w-3 h-3 mr-1" />
+                                    Selected
+                                  </Badge>
+                                </div>
+                                <span className="text-sm text-slate-600">Set in Step 1</span>
+                              </div>
+                            </div>
+                            <div className="flex items-center space-x-1">
+                              <Lock className="w-4 h-4 text-slate-400" />
+                              <Badge variant="info" size="sm">Fixed</Badge>
+                            </div>
+                          </div>
+                          <p className="text-xs text-slate-500">
+                            This value was set in the Exchange Details step and applies to all source policies
+                          </p>
                         </div>
 
                         <Input
