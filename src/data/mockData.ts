@@ -210,7 +210,7 @@ export const mockDropTickets: DropTicket[] = [
     priority: 'normal',
     submissionDate: new Date('2024-12-15T10:30:00Z'),
     targetProductType: 'annuity',
-    targetCarrierId: 'symetra-financial',
+    targetCarrierId: 'artemis-financial',
     estimatedValue: 125000,
     notes: 'Client looking to consolidate multiple policies into single annuity',
     createdBy: 'party-agent-1',
