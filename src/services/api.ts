@@ -796,7 +796,7 @@ export const getAnalytics = async (): Promise<AnalyticsResponse> => {
         { carrierId: 'carrier-1', carrierName: 'MetLife Insurance', averageResponseTime: 48, slaComplianceRate: 95 },
         { carrierId: 'carrier-2', carrierName: 'Prudential Financial', averageResponseTime: 36, slaComplianceRate: 98 },
         { carrierId: 'carrier-3', carrierName: 'New York Life', averageResponseTime: 72, slaComplianceRate: 85 },
-        { carrierId: 'symetra-financial', carrierName: 'Symetra Financial', averageResponseTime: 42, slaComplianceRate: 96 }
+        { carrierId: 'artemis-financial', carrierName: 'Artemis Financial', averageResponseTime: 42, slaComplianceRate: 96 }
       ]
     },
     statusBreakdown: [
