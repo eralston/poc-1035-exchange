@@ -624,9 +624,9 @@ export const CreateExchange: React.FC<CreateExchangeProps> = ({ onNavigate }) =>
                         />
 
                         <div>
-                        <label className="block text-sm font-medium text-slate-700 mb-2">
-                          {formData.targetProductType}
-                        </label>
+                          <label className="block text-sm font-medium text-slate-700 mb-2">
+                            {formData.targetProductType}
+                          </label>
                         </div>
 
                         <Input
