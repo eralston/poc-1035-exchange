@@ -4,6 +4,7 @@ import { Navbar } from './components/Navbar';
 import { ProductPage } from './components/ProductPage';
 import { Dashboard } from './components/Dashboard';
 import { CreateExchange } from './components/CreateExchange';
+import { ExchangeDetail } from './components/ExchangeDetail';
 import { Button } from './components/ui/Button';
 import { ArrowRight, Zap } from 'lucide-react';
 
@@ -35,6 +36,18 @@ interface AppContentProps {
 }
 
 const AppContent: React.FC<AppContentProps> = ({ currentPage, pageData, onNavigate }) => {
+  // Exchange Detail view
+  if (currentPage === 'exchange-detail') {
+    return (
+      <div className="min-h-screen">
+        <ExchangeDetail 
+          exchangeId={pageData?.id || 'drop-ticket-1'} 
+          onNavigate={onNavigate} 
+        />
+      </div>
+    );
+  }
+
   // Dashboard view
   if (currentPage === 'dashboard' || currentPage === 'demo') {
     return (
