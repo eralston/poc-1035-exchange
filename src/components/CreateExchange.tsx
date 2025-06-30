@@ -623,7 +623,7 @@ export const CreateExchange: React.FC<CreateExchangeProps> = ({ onNavigate }) =>
                           placeholder="Select carrier"
                         />
 
-                        <Label>{formData.productType}</Label>
+                        <Label>{formData.targetProductType}</Label>
 
                         <Input
                           label="Product Name (Optional)"
