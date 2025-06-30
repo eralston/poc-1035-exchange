@@ -353,7 +353,6 @@ export const CreateExchange: React.FC<CreateExchangeProps> = ({ onNavigate }) =>
                       All exchanges are processed to Symetra Financial as the receiving carrier
                     </p>
                   </div>
-
                   <Select
                     label="Target Product Type"
                     options={productTypeOptions}
@@ -624,12 +623,7 @@ export const CreateExchange: React.FC<CreateExchangeProps> = ({ onNavigate }) =>
                           placeholder="Select carrier"
                         />
 
-                        <Select
-                          label="Product Type"
-                          options={productTypeOptions}
-                          value={account.accountType}
-                          onChange={(e) => updateSourceAccount(index, 'accountType', e.target.value)}
-                        />
+                        
 
                         <Input
                           label="Product Name (Optional)"
