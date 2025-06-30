@@ -32,7 +32,7 @@ export const CreateExchange: React.FC<CreateExchangeProps> = ({ onNavigate }) =>
   const [currentStep, setCurrentStep] = useState(1);
   const [formData, setFormData] = useState<Partial<CreateDropTicketRequest>>({
     targetProductType: 'annuity',
-    targetCarrierId: 'artemis-financial', // Fixed to Symetra
+    targetCarrierId: 'artemis-financial', // Fixed to Artemis
     estimatedValue: undefined,
     notes: '',
     sourceAccounts: [
