@@ -104,6 +104,12 @@ export const Dashboard: React.FC<DashboardProps> = ({ onNavigate }) => {
     { id: 'completed', title: 'Completed', status: 'pending' as const }
   ];
 
+  // Handle exchange row click
+  const handleExchangeClick = (exchange: DropTicket) => {
+    console.log('Exchange clicked:', exchange.id, exchange.ticketNumber);
+    onNavigate?.('exchange-detail', { id: exchange.id });
+  };
+
   const exchangeColumns = [
     {
       key: 'ticketNumber',
@@ -148,7 +154,10 @@ export const Dashboard: React.FC<DashboardProps> = ({ onNavigate }) => {
         <Button 
           variant="ghost" 
           size="sm"
-          onClick={() => onNavigate?.('exchange-detail', { id: row.id })}
+          onClick={(e) => {
+            e.stopPropagation(); // Prevent row click when clicking action button
+            onNavigate?.('exchange-detail', { id: row.id });
+          }}
         >
           <Eye className="w-4 h-4" />
         </Button>
@@ -455,11 +464,65 @@ export const Dashboard: React.FC<DashboardProps> = ({ onNavigate }) => {
             {/* Exchanges Table */}
             <Card>
               <CardContent className="p-0">
-                <Table
-                  data={dropTickets || []}
-                  columns={exchangeColumns}
-                  emptyMessage="No exchanges found"
-                />
+                <div className="overflow-hidden rounded-xl border border-slate-200 bg-white shadow-sm">
+                  <div className="overflow-x-auto">
+                    <table className="w-full">
+                      <thead className="bg-slate-50 border-b border-slate-200">
+                        <tr>
+                          {exchangeColumns.map((column) => (
+                            <th
+                              key={String(column.key)}
+                              className="px-6 py-4 text-left text-sm font-semibold text-slate-700"
+                            >
+                              {column.header}
+                            </th>
+                          ))}
+                        </tr>
+                      </thead>
+                      <tbody className="divide-y divide-slate-200">
+                        {dropTickets && dropTickets.length === 0 ? (
+                          <tr>
+                            <td 
+                              colSpan={exchangeColumns.length} 
+                              className="px-6 py-12 text-center text-slate-500"
+                            >
+                              No exchanges found
+                            </td>
+                          </tr>
+                        ) : (
+                          dropTickets?.map((row, index) => (
+                            <tr 
+                              key={row.id}
+                              className="hover:bg-blue-50 hover:border-l-4 hover:border-l-blue-500 transition-all duration-200 cursor-pointer"
+                              onClick={() => handleExchangeClick(row)}
+                            >
+                              {exchangeColumns.map((column) => {
+                                const getValue = (row: DropTicket, key: keyof DropTicket | string): any => {
+                                  if (typeof key === 'string' && key.includes('.')) {
+                                    return key.split('.').reduce((obj, k) => obj?.[k], row);
+                                  }
+                                  return row[key as keyof DropTicket];
+                                };
+
+                                return (
+                                  <td 
+                                    key={String(column.key)}
+                                    className="px-6 py-4 text-sm text-slate-900"
+                                  >
+                                    {column.render 
+                                      ? column.render(getValue(row, column.key), row)
+                                      : getValue(row, column.key)
+                                    }
+                                  </td>
+                                );
+                              })}
+                            </tr>
+                          ))
+                        )}
+                      </tbody>
+                    </table>
+                  </div>
+                </div>
               </CardContent>
             </Card>
           </div>
