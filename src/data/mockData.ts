@@ -71,13 +71,13 @@ export const mockCarriers: Carrier[] = [
     updatedAt: new Date('2024-01-01')
   },
   {
-    id: 'symetra-financial',
-    name: 'Symetra Financial',
+    id: 'artemis-financial',
+    name: 'Artemis Financial',
     code: 'SYM',
-    contactEmail: 'exchanges@symetra.com',
+    contactEmail: 'exchanges@artemis.com',
     contactPhone: '1-800-796-3872',
     preferredCommunicationMethod: 'api',
-    apiEndpoint: 'https://api.symetra.com/exchanges',
+    apiEndpoint: 'https://api.artemis.com/exchanges',
     slaHours: 48,
     isActive: true,
     createdAt: new Date('2024-01-01'),
