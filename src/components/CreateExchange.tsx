@@ -28,6 +28,9 @@ export const CreateExchange: React.FC<CreateExchangeProps> = ({ onNavigate }) =>
   const [currentStep, setCurrentStep] = useState(1);
   const [formData, setFormData] = useState<Partial<CreateDropTicketRequest>>({
     targetProductType: 'annuity',
+    targetCarrierId: '', // Start empty so user can select
+    estimatedValue: undefined,
+    notes: '',
     sourceAccounts: [
       {
         accountNumber: '',
@@ -72,6 +75,15 @@ export const CreateExchange: React.FC<CreateExchangeProps> = ({ onNavigate }) =>
       try {
         const carriersData = await getCarriers();
         setCarriers(carriersData);
+        
+        // Set Symetra Financial as default if it exists
+        const symetra = carriersData.find(c => c.name.toLowerCase().includes('symetra'));
+        if (symetra) {
+          setFormData(prev => ({
+            ...prev,
+            targetCarrierId: symetra.id
+          }));
+        }
       } catch (error) {
         console.error('Error loading carriers:', error);
       }
@@ -79,9 +91,12 @@ export const CreateExchange: React.FC<CreateExchangeProps> = ({ onNavigate }) =>
     loadCarriers();
   }, []);
 
+  // Create carrier options with Symetra highlighted
   const carrierOptions = carriers.map(carrier => ({
     value: carrier.id,
-    label: `${carrier.name} (${carrier.code})`
+    label: carrier.name.toLowerCase().includes('symetra') 
+      ? `${carrier.name} (${carrier.code}) - Our Company` 
+      : `${carrier.name} (${carrier.code})`
   }));
 
   const productTypeOptions = [
@@ -139,13 +154,21 @@ export const CreateExchange: React.FC<CreateExchangeProps> = ({ onNavigate }) =>
   };
 
   const updateFormData = (section: string, field: string, value: any) => {
-    setFormData(prev => ({
-      ...prev,
-      [section]: {
-        ...prev[section as keyof typeof prev],
+    if (section === '') {
+      // Top-level field
+      setFormData(prev => ({
+        ...prev,
         [field]: value
-      }
-    }));
+      }));
+    } else {
+      setFormData(prev => ({
+        ...prev,
+        [section]: {
+          ...prev[section as keyof typeof prev],
+          [field]: value
+        }
+      }));
+    }
   };
 
   const updateNestedFormData = (section: string, subsection: string, field: string, value: any) => {
