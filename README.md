@@ -1,3 +1,20 @@
+# 1035 Exchange Front-End Prototype
+This was developed with [bolt.net](https://bolt.new/) and [a hosted demo is live NOW right HERE](https://moonlit-sunshine-3e45f7.netlify.app/).
+
+This is an example of how to work with AI-powered rapid prototyping tools, including how to organize work using markdown files in the project. README.md, PRD.md, Design.md, Data.md, and Plan.md are each generated as intermediary content to guide the process.
+
+## Marketing Landing Page Like a Real Product
+![Screenshot 2025-06-30 at 1 29 05 PM](https://github.com/user-attachments/assets/7196b055-c6fd-430f-93d7-b9abc68e309c)
+
+## Admin Dashboard
+![Screenshot 2025-06-30 at 1 29 11 PM](https://github.com/user-attachments/assets/a6a9b374-48d9-480f-9e30-f2426bffc1af)
+
+## Create a new 1035 Exchange
+![Screenshot 2025-06-30 at 1 29 53 PM](https://github.com/user-attachments/assets/0884ffde-1ca9-4bec-8f08-49dd24f1afb4)
+
+## 1035 Exchange Details
+![Screenshot 2025-06-30 at 1 30 17 PM](https://github.com/user-attachments/assets/3e37ff55-cbe8-42d8-a462-9bf042b8ad1c)
+
 # 1035 Exchange Workflow Management System
 
 A comprehensive SaaS platform designed to streamline the IRS Section 1035 exchange process for insurance companies, focusing on the workflow executed by the receiving company. This application transforms the traditionally fragmented, manual process into a secure, trackable, and efficient digital workflow.
