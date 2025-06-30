@@ -13,7 +13,9 @@ import {
   User,
   Building2,
   FileText,
-  CheckCircle
+  CheckCircle,
+  Shield,
+  Star
 } from 'lucide-react';
 import { getCarriers, createDropTicket } from '../services/api';
 import { Carrier, ProductType } from '../types';
@@ -28,7 +30,7 @@ export const CreateExchange: React.FC<CreateExchangeProps> = ({ onNavigate }) =>
   const [currentStep, setCurrentStep] = useState(1);
   const [formData, setFormData] = useState<Partial<CreateDropTicketRequest>>({
     targetProductType: 'annuity',
-    targetCarrierId: '', // Start empty so user can select
+    targetCarrierId: 'symetra-financial', // Fixed to Symetra
     estimatedValue: undefined,
     notes: '',
     sourceAccounts: [
@@ -75,15 +77,6 @@ export const CreateExchange: React.FC<CreateExchangeProps> = ({ onNavigate }) =>
       try {
         const carriersData = await getCarriers();
         setCarriers(carriersData);
-        
-        // Set Symetra Financial as default if it exists
-        const symetra = carriersData.find(c => c.name.toLowerCase().includes('symetra'));
-        if (symetra) {
-          setFormData(prev => ({
-            ...prev,
-            targetCarrierId: symetra.id
-          }));
-        }
       } catch (error) {
         console.error('Error loading carriers:', error);
       }
@@ -91,12 +84,9 @@ export const CreateExchange: React.FC<CreateExchangeProps> = ({ onNavigate }) =>
     loadCarriers();
   }, []);
 
-  // Create carrier options with Symetra highlighted
   const carrierOptions = carriers.map(carrier => ({
     value: carrier.id,
-    label: carrier.name.toLowerCase().includes('symetra') 
-      ? `${carrier.name} (${carrier.code}) - Our Company` 
-      : `${carrier.name} (${carrier.code})`
+    label: `${carrier.name} (${carrier.code})`
   }));
 
   const productTypeOptions = [
@@ -332,14 +322,40 @@ export const CreateExchange: React.FC<CreateExchangeProps> = ({ onNavigate }) =>
                 </div>
 
                 <div className="grid md:grid-cols-2 gap-6">
-                  <Select
-                    label="Target Carrier"
-                    options={carrierOptions}
-                    value={formData.targetCarrierId || ''}
-                    onChange={(e) => updateFormData('', 'targetCarrierId', e.target.value)}
-                    error={errors.targetCarrierId}
-                    placeholder="Select target carrier"
-                  />
+                  {/* Locked Target Carrier */}
+                  <div className="space-y-2">
+                    <label className="block text-sm font-medium text-slate-700">
+                      Target Carrier
+                    </label>
+                    <div className="relative">
+                      <div className="w-full px-4 py-3 bg-gradient-to-r from-blue-50 to-purple-50 border-2 border-blue-200 rounded-lg flex items-center justify-between">
+                        <div className="flex items-center space-x-3">
+                          <div className="w-8 h-8 bg-gradient-to-br from-blue-500 to-purple-600 rounded-lg flex items-center justify-center">
+                            <Shield className="w-4 h-4 text-white" />
+                          </div>
+                          <div>
+                            <div className="flex items-center space-x-2">
+                              <span className="font-semibold text-slate-900">Symetra Financial</span>
+                              <Badge variant="success" size="sm">
+                                <Star className="w-3 h-3 mr-1" />
+                                Our Company
+                              </Badge>
+                            </div>
+                            <span className="text-sm text-slate-600">Receiving Carrier</span>
+                          </div>
+                        </div>
+                        <div className="text-slate-400">
+                          <Shield className="w-5 h-5" />
+                        </div>
+                      </div>
+                      <div className="absolute top-2 right-2">
+                        <Badge variant="info" size="sm">Fixed</Badge>
+                      </div>
+                    </div>
+                    <p className="text-xs text-slate-500">
+                      All exchanges are processed to Symetra Financial as the receiving carrier
+                    </p>
+                  </div>
 
                   <Select
                     label="Target Product Type"
