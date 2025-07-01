@@ -6,6 +6,7 @@ import { Dashboard } from './components/Dashboard';
 import { CreateExchange } from './components/CreateExchange';
 import { ExchangeDetail } from './components/ExchangeDetail';
 import { AccountDetail } from './components/AccountDetail';
+import { FullscreenButton } from './components/FullscreenButton';
 import { Button } from './components/ui/Button';
 import { ArrowRight, Zap } from 'lucide-react';
 
@@ -26,6 +27,7 @@ function App() {
         pageData={pageData} 
         onNavigate={handleNavigate} 
       />
+      <FullscreenButton />
     </RealtimeProvider>
   );
 }
